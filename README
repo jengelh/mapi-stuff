@@ -1,0 +1,14 @@
+The program adds or remove the PR_PROFILE_USER_SMTP_EMAIL_ADDRESS
+property from one or more MAPI profiles. Starting with the KB 3172519
+update, using the "Reply All" functionality in Outlook 2013 would place
+one own's address in the To: field as well. Setting said property with
+one's address cures Outlook's new behavior.
+
+It can be built with Kopano's libmapi (for testing), or with Microsoft
+mapi32. The latter requires MSVC — the executable produced with MinGW
+unfortunately dies with a symbol lookup error.
+
+	g++ [-std=gnu++11] -o smtpaddr smtpaddr.cpp
+		`pkg-config kopano --cflags --libs` -lkcutil
+
+	cl -DUNICODE smtpaddr.cpp mapi32.lib
